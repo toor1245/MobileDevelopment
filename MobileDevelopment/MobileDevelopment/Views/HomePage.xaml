@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileDevelopment.ViewModels"  
+             xmlns:model="clr-namespace:MobileDevelopment.Models"
+             Title="{Binding Title}"
+             x:Class="MobileDevelopment.Views.HomePage">
+    
+    <ContentPage.Content>
+        <StackLayout Spacing="8" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Label Text="{Binding Name}" />
+            <Label Text="{Binding Group}" />
+            <Label Text="{Binding RecordBook}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
