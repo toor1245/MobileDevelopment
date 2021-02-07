@@ -33,7 +33,6 @@ namespace MobileDevelopment.ViewModels
             get => _group;
             set => SetProperty(ref _group, value);
         }
-
         
         public string RecordBook
         {

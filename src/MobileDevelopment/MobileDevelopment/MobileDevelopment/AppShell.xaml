@@ -47,8 +47,11 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="Laboratory Work №1" Icon="ic_launcher.png">
+    <FlyoutItem Title="Laboratory Work №1.1" Icon="ic_launcher.png">
         <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Laboratory Work №1.2 Part 2">
+        <ShellContent Route="CoordinatePage" ContentTemplate="{DataTemplate local:CoordinatePage}" />
     </FlyoutItem>
     
 </Shell>
