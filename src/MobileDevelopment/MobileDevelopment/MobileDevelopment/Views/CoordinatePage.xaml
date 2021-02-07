@@ -10,15 +10,21 @@
             <Entry Text="{Binding Input, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="DDD" FontSize="Medium" />
             <Editor Text="{Binding DecimalDegree, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            
             <StackLayout Orientation="Horizontal">
                 <Button Text="Convert" Command="{Binding ConvertCommand}" HorizontalOptions="FillAndExpand"></Button>
             </StackLayout>
-            <Label Text="Get Distance" FontSize="Medium" />
+            
+            <Label Text="Coordinate A" FontSize="Medium" />
             <Entry Text="{Binding CoordinateA, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="DDD" FontSize="Medium" />
-            <Editor Text="{Binding CoordinateB, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            <Label Text="Coordinate B" FontSize="Medium" />
+            
+            <Entry Text="{Binding CoordinateB, Mode=TwoWay}" FontSize="Medium" Margin="0" />
+            <Label Text="Result:"/>
+            <Label Text="{Binding Result}"/>
+            
             <StackLayout Orientation="Horizontal">
-                <Button Text="Convert" Command="{Binding ConvertCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Calculate distance" Command="{Binding CalculateCommand}" HorizontalOptions="FillAndExpand"></Button>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

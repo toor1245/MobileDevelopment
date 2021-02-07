@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -11,7 +12,7 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
     public class Contents
     {
         private ITestOutputHelper _outputHelper;
-        
+
         public Contents(ITestOutputHelper outputHelper)
         {
             _outputHelper = outputHelper;
@@ -65,6 +66,16 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
             
             // Assert
             Assert.Equal(actual, expectedCount);
+
+            foreach (var i in dictionary.Keys)
+            {
+                _outputHelper.WriteLine(i);
+                foreach (var x in dictionary.Values.SelectMany(j => j))
+                {
+                    _outputHelper.WriteLine(x);
+                }
+                _outputHelper.WriteLine(" ");
+            }
         }
         
         #endregion
@@ -119,6 +130,20 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
                 });
             
             var dictionary = data.ToDictionary(i => i.Group, i => i.Students);
+            
+            foreach (var i in dictionary.Keys)
+            {
+                _outputHelper.WriteLine(i);
+                foreach (var (key, value) in dictionary.Values.SelectMany(j => j))
+                {
+                    _outputHelper.WriteLine(key);
+                    foreach (var k in value)
+                    {
+                        _outputHelper.WriteLine(k.ToString());
+                    }
+                }
+                _outputHelper.WriteLine(" ");
+            }
         }
         
         #endregion
@@ -158,6 +183,17 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
                 });
             
             var dictionary = data.ToDictionary(i => i.Group, i => i.Students);
+            
+            foreach (var i in dictionary.Keys)
+            {
+                _outputHelper.WriteLine(i);
+                foreach (var (key, value) in dictionary.Values.SelectMany(j => j))
+                {
+                    _outputHelper.WriteLine(key);
+                    _outputHelper.WriteLine(value.ToString());
+                }
+                _outputHelper.WriteLine(" ");
+            }
         }
         
         #endregion
@@ -196,6 +232,13 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
                 });
             
             var dictionary = data.ToDictionary(i => i.Group, i => i.AvgPoints);
+            
+            foreach (var (key, value) in dictionary)
+            {
+                _outputHelper.WriteLine(key);
+                _outputHelper.WriteLine(value.ToString(CultureInfo.InvariantCulture));
+                _outputHelper.WriteLine(" ");
+            }
         }
         
         #endregion
@@ -238,6 +281,15 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
                 });
             
             var dictionary = data.ToDictionary(i => i.Group, i => i.Students);
+
+            foreach (var i in dictionary.Keys)
+            {
+                _outputHelper.WriteLine(i);
+                foreach (var student in dictionary[i])
+                {
+                    _outputHelper.WriteLine(student);
+                }
+            }
         }
         
         #endregion
