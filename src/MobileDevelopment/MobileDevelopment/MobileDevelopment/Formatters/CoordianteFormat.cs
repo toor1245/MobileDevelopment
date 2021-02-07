@@ -15,20 +15,7 @@ namespace MobileDevelopment.Formatters
         public string Format(string fmt, object arg, IFormatProvider formatProvider)
         {
             // Provide default formatting if arg is not an CoordinateXY.
-            if (arg.GetType() != typeof(CoordinateMh))
-            {
-                try
-                {
-                    return SoftwareFallback(fmt, arg);
-                }
-                catch (FormatException e)
-                {
-                    throw new FormatException($"The format of '{fmt}' is invalid.", e);
-                }
-            }
-            
-            // Provide default formatting for unsupported format strings.
-            if (!(fmt is "G" || fmt is "D"))
+            if (arg.GetType() != typeof(CoordinateMh) || !(fmt is "G" || fmt is "D"))
             {
                 try
                 {
@@ -46,14 +33,9 @@ namespace MobileDevelopment.Formatters
             return fmt switch
             {
                 "G" => $"{result.Degree}°{result.Minute}'{result.Second}\" {result.Direction}",
-                "D" => SoftwareDecimalFallback(result),
+                "D" => $"{result.ToDecimalDegree()} {result.Direction}",
                 _ => SoftwareFallback(fmt, arg)
             };
-            
-            static string SoftwareDecimalFallback(CoordinateMh coordinateMh)
-            {
-                return $"{coordinateMh.ToDecimalDegree()} {coordinateMh.Direction}";
-            }
             
             static string SoftwareFallback(string format, object arg)
             {
