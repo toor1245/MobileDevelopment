@@ -9,5 +9,6 @@ Part2:
 * [PR 1](https://github.com/toor1245/MobileDevelopment/pull/1)
 * [CoordinateMH](https://github.com/toor1245/MobileDevelopment/blob/master/src/MobileDevelopment/Models/CoordinateMH.cs)
 * [CoordinatePage.xaml](https://github.com/toor1245/MobileDevelopment/blob/master/src/MobileDevelopment/Views/CoordinatePage.xaml)
+* [Update validation](https://github.com/toor1245/MobileDevelopment/pull/3)
 
 
