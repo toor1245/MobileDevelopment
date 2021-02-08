@@ -1,4 +1,4 @@
-# MobileDevelopment
+# MobileDevelopment Mykola Hohsadze IO-83
 
 Laboratory Work 1.2
 
