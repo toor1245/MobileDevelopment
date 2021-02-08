@@ -37,30 +37,31 @@ namespace MobileDevelopment.Models
 
         public CoordinateMh(string coordinate)
         {
+            if (!Regex.IsMatch(coordinate, @"^(((1?[0-9])|(2[0-4]))(:|°|.)[1-6]?[0-9]'[1-6]?[0-9]""[sSwWnNeE])$"))
+            {
+                throw new ArgumentException("Incorrect format");
+            }
+            
             // handle direction.
-            if (coordinate.Contains("S"))
+            if (coordinate.Contains("S") || coordinate.Contains("s"))
             {
                 Direction = Direction.S;
             }
-            else if (coordinate.Contains("W"))
+            else if (coordinate.Contains("W") || coordinate.Contains("w"))
             {
                 Direction = Direction.W;
             }
-            else if (coordinate.Contains("E"))
+            else if (coordinate.Contains("E") || coordinate.Contains("e"))
             {
                 Direction = Direction.E;
             }
-            else if (coordinate.Contains("N"))
+            else if (coordinate.Contains("N") || coordinate.Contains("n"))
             {
                 Direction = Direction.N;
             }
-            else
-            {
-                throw new ArgumentException("Incorrect format, direction not exist.");
-            }
-            
+
             // remove the characters
-            coordinate = Regex.Replace(coordinate, @"[^0-9.°'""]", ""); 
+            coordinate = Regex.Replace(coordinate, @"[^0-9.°:'""]", ""); 
             
             // split the string.
             var pointArray = coordinate.Split('°', '\'', '\"', '.');
