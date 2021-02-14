@@ -50,8 +50,11 @@
     <FlyoutItem Title="Laboratory Work №1.1" Icon="ic_launcher.png">
         <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Laboratory Work №1.2 Part 2">
+    <FlyoutItem Title="Laboratory Work №1.2 Part 2" Icon="icon_about.png">
         <ShellContent Route="CoordinatePage" ContentTemplate="{DataTemplate local:CoordinatePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Laboratory Work №2" Icon="icon_feed.png">
+        <ShellContent Route="ChartPage" ContentTemplate="{DataTemplate local:ChartPage}" />
     </FlyoutItem>
     
 </Shell>

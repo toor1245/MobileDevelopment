@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MobileDevelopment.Services
+namespace MobileDevelopment.Interfaces
 {
     public interface IDataStore<T>
     {

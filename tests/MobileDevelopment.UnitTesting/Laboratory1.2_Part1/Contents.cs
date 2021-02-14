@@ -67,12 +67,13 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
             // Assert
             Assert.Equal(actual, expectedCount);
 
+            _outputHelper.WriteLine("Task1");
             foreach (var i in dictionary.Keys)
             {
                 _outputHelper.WriteLine(i);
-                foreach (var x in dictionary.Values.SelectMany(j => j))
+                foreach (var j in dictionary[i])
                 {
-                    _outputHelper.WriteLine(x);
+                    _outputHelper.WriteLine(j);
                 }
                 _outputHelper.WriteLine(" ");
             }
@@ -131,13 +132,14 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
             
             var dictionary = data.ToDictionary(i => i.Group, i => i.Students);
             
+            _outputHelper.WriteLine("Task2");
             foreach (var i in dictionary.Keys)
             {
                 _outputHelper.WriteLine(i);
-                foreach (var (key, value) in dictionary.Values.SelectMany(j => j))
+                foreach (var j in dictionary[i])
                 {
-                    _outputHelper.WriteLine(key);
-                    foreach (var k in value)
+                    _outputHelper.WriteLine(j.Key);
+                    foreach (var k in j.Value)
                     {
                         _outputHelper.WriteLine(k.ToString());
                     }
@@ -184,13 +186,14 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
             
             var dictionary = data.ToDictionary(i => i.Group, i => i.Students);
             
+            _outputHelper.WriteLine("Task3");
             foreach (var i in dictionary.Keys)
             {
                 _outputHelper.WriteLine(i);
-                foreach (var (key, value) in dictionary.Values.SelectMany(j => j))
+                foreach (var j in dictionary[i])
                 {
-                    _outputHelper.WriteLine(key);
-                    _outputHelper.WriteLine(value.ToString());
+                    _outputHelper.WriteLine(j.Key);
+                    _outputHelper.WriteLine(j.Value.ToString());
                 }
                 _outputHelper.WriteLine(" ");
             }
@@ -233,6 +236,7 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
             
             var dictionary = data.ToDictionary(i => i.Group, i => i.AvgPoints);
             
+            _outputHelper.WriteLine("Task4");
             foreach (var (key, value) in dictionary)
             {
                 _outputHelper.WriteLine(key);
@@ -282,6 +286,7 @@ namespace MobileDevelopment.UnitTesting.Laboratory1._2_Part1
             
             var dictionary = data.ToDictionary(i => i.Group, i => i.Students);
 
+            _outputHelper.WriteLine("Task5");
             foreach (var i in dictionary.Keys)
             {
                 _outputHelper.WriteLine(i);

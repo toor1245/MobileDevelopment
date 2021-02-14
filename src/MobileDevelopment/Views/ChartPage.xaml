@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
+             xmlns:eventBehavior="clr-namespace:MobileDevelopment.EventBehavior;assembly=MobileDevelopment"
+             x:Class="MobileDevelopment.Views.ChartPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Switch IsToggled="{Binding IsToggled}">
+                    <Switch.Behaviors>
+                        <eventBehavior:EventToCommandBehavior EventName="Toggled" Command="{Binding ToggledCommand}"/>
+                    </Switch.Behaviors>
+                </Switch>
+                <microcharts:ChartView Chart="{Binding Chart}" HeightRequest="400" IsVisible="{Binding IsVisible}"/>
+                <oxy:PlotView Model="{Binding Model,  Mode=TwoWay}"
+                              HorizontalOptions="CenterAndExpand"
+                              Margin="4" HeightRequest="350"
+                              VerticalOptions="Start"
+                              WidthRequest="350" 
+                              IsVisible="{Binding IsVisiblePlot}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
