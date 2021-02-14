@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using MobileDevelopment.Extensions;
 using MobileDevelopment.Models;
 using Xunit;
@@ -24,6 +25,9 @@ namespace MobileDevelopment.UnitTesting.Coordinate
             
             // Act
             var actual = coordinate.ToDecimalDegree();
+            
+            _outputHelper.WriteLine("13°49'50\"S");
+            _outputHelper.WriteLine("Converted to DD.DDDDD" + actual.ToString(CultureInfo.InvariantCulture));
             
             // Assert
             Assert.Equal(expected, actual);

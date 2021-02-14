@@ -1,6 +1,7 @@
-﻿using MobileDevelopment.Services;
-using MobileDevelopment.Views;
+﻿using MobileDevelopment.Views;
 using System;
+using MobileDevelopment.Interfaces;
+using MobileDevelopment.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,9 +13,7 @@ namespace MobileDevelopment
         public App()
         {
             InitializeComponent();
-
-            // DI register example
-            // DependencyService.Register<MockDataStore>();
+            DependencyService.Register<IChartStore, ChartStore>();
             MainPage = new AppShell();
         }
 
