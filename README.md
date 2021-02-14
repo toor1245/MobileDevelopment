@@ -11,4 +11,7 @@ Part2:
 * [CoordinatePage.xaml](https://github.com/toor1245/MobileDevelopment/blob/master/src/MobileDevelopment/Views/CoordinatePage.xaml)
 * [Update validation](https://github.com/toor1245/MobileDevelopment/pull/3)
 
+Laboratory Work 2
+* [PR](https://github.com/toor1245/MobileDevelopment/pull/4)
+
 
