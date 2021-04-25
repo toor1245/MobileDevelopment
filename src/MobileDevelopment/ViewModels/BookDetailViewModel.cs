@@ -1,64 +1,37 @@
 using System;
 using System.Diagnostics;
+using MobileDevelopment.Models;
 using Xamarin.Forms;
 
 namespace MobileDevelopment.ViewModels
 {
-    [QueryProperty(nameof(BookId), nameof(BookId))]
+    [QueryProperty(nameof(Isbn13), nameof(Isbn13))]
     public class BookDetailViewModel : BaseViewModel
     {
-        private string _bookId;
-        private string _title;
-        private string _subtitle;
-        private string _isbn13;
-        private string _price;
-        
-        public string BookId
-        {
-            get => _bookId;
-            set
-            {
-                _bookId = value;
-                LoadItemId(value);
-            }
-        }
-        
-        public string Id { get; set; }
+        private BookDetail _bookDetail;
+        private string _isbn13 { get; set; }
 
-        public new string Title
+        public BookDetail BookDetail
         {
-            get => _title;
-            set => SetProperty(ref _title, value);
+            get => _bookDetail;
+            set => SetProperty(ref _bookDetail, value);
         }
-        
-        public string SubTitle
-        {
-            get => _subtitle;
-            set => SetProperty(ref _subtitle, value);
-        }
-
         public string Isbn13
         {
             get => _isbn13;
-            set => SetProperty(ref _isbn13, value);
-        }
-
-        public string Price
-        {
-            get => _price;
-            set => SetProperty(ref _price, value);
+            set
+            {
+                _isbn13 = value;
+                LoadItemId(value);
+            }
         }
 
         private async void LoadItemId(string itemId)
         {
             try
             {
-                var item = await BaseStoreViewModel.BookStore.GetItemAsync(itemId);
-                Id = item.Id;
-                Title = item.Title;
-                SubTitle = item.SubTitle;
-                Isbn13 = item.Isbn13;
-                Price = item.Price;
+                var item = await BaseStoreViewModel.BookStore.GetBookDetail(itemId);
+                BookDetail = item;
             }
             catch (Exception)
             {
