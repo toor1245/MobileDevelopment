@@ -14,4 +14,8 @@ Part2:
 Laboratory Work 2
 * [PR](https://github.com/toor1245/MobileDevelopment/pull/4)
 
+Laboratory Work 3
+* [Commit_to_master](https://github.com/toor1245/MobileDevelopment/commit/38743c075362a7c092d4f6e617de6f5ef998e093)
+* [PR](https://github.com/toor1245/MobileDevelopment/pull/8)
+
 
