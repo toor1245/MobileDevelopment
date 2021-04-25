@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:local="clr-namespace:MobileDevelopment.ViewModels;assembly=MobileDevelopment"  
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:model="clr-namespace:MobileDevelopment.Models;assembly=MobileDevelopment"  
+             xmlns:model="clr-namespace:MobileDevelopment.Models;assembly=MobileDevelopment"
              Title="{Binding Title}"
              x:Class="MobileDevelopment.Views.BooksPage">
     <ContentPage.Content>
@@ -11,25 +11,43 @@
             <CollectionView ItemsSource="{Binding Books}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Padding="10" x:DataType="model:Book">
-                            <Label Text="{Binding Id}" 
-                                   LineBreakMode="TailTruncation"
-                                   FontSize="16" />
-                            <Label Text="{Binding Isbn13}" 
-                                   LineBreakMode="TailTruncation"
-                                   FontSize="13" />
-                            <Label Text="{Binding Price}" 
-                                   LineBreakMode="WordWrap"
-                                   Style="{DynamicResource ListItemDetailTextStyle}"
-                                   FontSize="13" />
-                            <StackLayout.GestureRecognizers>
+                        <Grid Padding="10" x:DataType="model:Book">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="2"
+                                   Source="{Binding ImageSource}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="60"
+                                   WidthRequest="60" />
+                            <Label Grid.Row="0" Grid.Column="1"
+                                   Text="{Binding Title}"
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding SubTitle}"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="End" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="{Binding Price}"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="End" />
+                            <Grid.GestureRecognizers>
                                 <TapGestureRecognizer 
                                     NumberOfTapsRequired="1"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:BooksViewModel}}, Path=BookTapped}"		
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:BooksViewModel}}, 
+                                    Path=BookTapped}"		
                                     CommandParameter="{Binding .}">
                                 </TapGestureRecognizer>
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
+                            </Grid.GestureRecognizers>
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

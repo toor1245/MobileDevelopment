@@ -1,4 +1,8 @@
+using System.Reflection;
 using System.Text.Json.Serialization;
+using MobileDevelopment.Extensions;
+using MobileDevelopment.Views;
+using Xamarin.Forms;
 
 namespace MobileDevelopment.Models
 {
@@ -21,5 +25,6 @@ namespace MobileDevelopment.Models
         
         [JsonPropertyName("image")]
         public string Image { get; set; }
+        public ImageSource ImageSource => ImageSource.FromResource(string.Concat(Constants.RESOURCES, Image), typeof(BooksPage).GetTypeInfo().Assembly);
     }
 }

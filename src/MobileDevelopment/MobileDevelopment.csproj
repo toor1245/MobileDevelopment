@@ -21,36 +21,36 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Remove="Resources\Image_01.png" />
-    <Content Include="Resources\Image_01.png">
+    <EmbeddedResource Include="Resources\Image_01.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <None Remove="Resources\Image_02.png" />
-    <Content Include="Resources\Image_02.png">
+    <EmbeddedResource Include="Resources\Image_02.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <None Remove="Resources\Image_03.png" />
-    <Content Include="Resources\Image_03.png">
+    <EmbeddedResource Include="Resources\Image_03.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <None Remove="Resources\Image_05.png" />
-    <Content Include="Resources\Image_05.png">
+    <EmbeddedResource Include="Resources\Image_05.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <None Remove="Resources\Image_06.png" />
-    <Content Include="Resources\Image_06.png">
+    <EmbeddedResource Include="Resources\Image_06.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <None Remove="Resources\Image_07.png" />
-    <Content Include="Resources\Image_07.png">
+    <EmbeddedResource Include="Resources\Image_07.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <None Remove="Resources\Image_08.png" />
-    <Content Include="Resources\Image_08.png">
+    <EmbeddedResource Include="Resources\Image_08.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <None Remove="Resources\Image_10.png" />
-    <Content Include="Resources\Image_10.png">
+    <EmbeddedResource Include="Resources\Image_10.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

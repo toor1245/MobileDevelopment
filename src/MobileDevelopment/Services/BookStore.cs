@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
+using MobileDevelopment.Extensions;
 using MobileDevelopment.Interfaces;
 using MobileDevelopment.Models;
 
@@ -58,18 +59,12 @@ namespace MobileDevelopment.Services
                 return _temporaryCache;
             }
 
-            BookValuation result = null;
             var assembly = typeof(Book).GetTypeInfo().Assembly;
-            foreach (var res in assembly.GetManifestResourceNames())
-            {
-                if (!res.Contains("BookList.json")) 
-                    continue;
-                
-                var stream = assembly.GetManifestResourceStream(res);
-                _isCached = true;
-                result = await JsonSerializer.DeserializeAsync<BookValuation>(stream ?? throw new InvalidOperationException());
-            }
-
+            var stream = assembly.GetManifestResourceStream(Constants.BOOK_LIST_STORAGE);
+            
+            _isCached = true;
+            var result = await JsonSerializer.DeserializeAsync<BookValuation>(stream ?? throw new InvalidOperationException());
+            
             _temporaryCache = result;
             return result;
         }
