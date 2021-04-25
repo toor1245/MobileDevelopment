@@ -2,15 +2,112 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileDevelopment.ViewModels;assembly=MobileDevelopment"
              x:Class="MobileDevelopment.Views.BookDetailPage">
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Title:" FontSize="Medium" />
-        <Label Text="{Binding Title}" FontSize="Small"/>
-        <Label Text="SubTitle:" FontSize="Medium" />
-        <Label Text="{Binding SubTitle}" FontSize="Small"/>
-        <Label Text="Isbn13:" FontSize="Medium" />
-        <Label Text="{Binding Isbn13}" FontSize="Small"/>
-        <Label Text="Price:" FontSize="Medium" />
-        <Label Text="{Binding Price}" FontSize="Small"/>
+       <StackLayout x:DataType="local:BookDetailViewModel" Margin="15">
+        <Image Source="{Binding BookDetail.ImageSource }"
+               Aspect="AspectFill"
+               HorizontalOptions="Center"
+               HeightRequest="250"
+               WidthRequest="250" />
+        
+        <Grid x:DataType="local:BookDetailViewModel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Text="Title:" FontSize="Medium" TextColor="Black" />
+            <Label Grid.Row="0" 
+                   Grid.Column="1" 
+                   Margin="0, 3, 0, 0" 
+                   Text="{Binding BookDetail.Title}"
+                   FontSize="Small" 
+                   TextColor="Gray" />
+        
+            <Label Grid.Row="1" Grid.Column="0" Text="SubTitle:" FontSize="Medium" TextColor="Black" />
+            <Label Grid.Row="1" 
+                   Grid.Column="1" 
+                   Margin="0, 3, 0, 0"
+                   Text="{Binding BookDetail.SubTitle}"
+                   FontSize="Small" TextColor="Gray" />
+        
+            <Label Grid.Row="2" Grid.Column="0" Text="Price:" FontSize="Medium" TextColor="Black" />
+            <Label Grid.Row="2" 
+                   Grid.Column="1"
+                   Margin="0, 3, 0, 0" 
+                   Text="{Binding BookDetail.Price}" 
+                   FontSize="Small"
+                   TextColor="Gray" />
+            <Label Grid.Row="3" Grid.Column="0" Text="Description:" FontSize="Medium" TextColor="Black" />
+            <Label Grid.Row="3" 
+                   Grid.Column="1"
+                   Margin="0, 3, 0, 0" 
+                   Text="{Binding BookDetail.Description}" 
+                   FontSize="Small"
+                   TextColor="Gray" />
+            
+            <Label Grid.Row="4" Grid.Column="0" 
+                   Text="Authors:" 
+                   FontSize="Medium" 
+                   TextColor="Black"/>
+            <Label Grid.Row="4" 
+                   Grid.Column="1"
+                   Text="{Binding BookDetail.Authors}" 
+                   FontSize="Small"
+                   TextColor="Gray" />
+            
+            <Label Grid.Row="5" Grid.Column="0" Text="Publisher:" FontSize="Medium" TextColor="Black"/>
+            <Label Grid.Row="5" 
+                   Grid.Column="1"
+                   Margin="0, 3, 0, 0" 
+                   Text="{Binding BookDetail.Publisher}" 
+                   FontSize="Small"
+                   TextColor="Gray" />
+            
+            <Label Grid.Row="6" Grid.Column="0" 
+                   Text="Pages:" 
+                   FontSize="Medium" 
+                   TextColor="Black" />
+            <Label Grid.Row="6" 
+                   Grid.Column="1"
+                   Margin="0, 3, 0, 0" 
+                   Text="{Binding BookDetail.Pages}" 
+                   FontSize="Small"
+                   TextColor="Gray" />
+            
+            <Label Grid.Row="7" Grid.Column="0" 
+                   Text="Year:" 
+                   FontSize="Medium" 
+                   TextColor="Black" />
+            <Label Grid.Row="7" 
+                   Grid.Column="1"
+                   Margin="0, 3, 0, 0" 
+                   Text="{Binding BookDetail.Year}" 
+                   FontSize="Small"
+                   TextColor="Gray" />
+            
+            <Label Grid.Row="8" Grid.Column="0" 
+                   Text="Rating:" 
+                   FontSize="Medium" 
+                   TextColor="Black" />
+            <Label Grid.Row="8" 
+                   Grid.Column="1"
+                   Margin="0, 3, 0, 0" 
+                   Text="{Binding BookDetail.Rating}" 
+                   FontSize="Small"
+                   TextColor="Gray" />
+        </Grid>
     </StackLayout>
 </ContentPage>

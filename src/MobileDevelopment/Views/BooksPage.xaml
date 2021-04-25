@@ -5,52 +5,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:MobileDevelopment.Models;assembly=MobileDevelopment"
              Title="{Binding Title}"
+             x:Name="Page"
              x:Class="MobileDevelopment.Views.BooksPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:DataType="local:BooksViewModel" Text="Add" Command="{Binding AddBookCommand}" />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
-        <RefreshView x:DataType="local:BooksViewModel" Command="{Binding LoadBooksCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-            <CollectionView ItemsSource="{Binding Books}" SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10" x:DataType="model:Book">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.RowSpan="2"
-                                   Source="{Binding ImageSource}"
-                                   Aspect="AspectFill"
-                                   HeightRequest="60"
-                                   WidthRequest="60" />
-                            <Label Grid.Row="0" Grid.Column="1"
-                                   Text="{Binding Title}"
-                                   FontAttributes="Bold" />
-                            <Label Grid.Row="1"
-                                   Grid.Column="1"
-                                   Text="{Binding SubTitle}"
-                                   FontAttributes="Italic"
-                                   VerticalOptions="End" />
-                            <Label Grid.Row="2"
-                                   Grid.Column="1"
-                                   Text="{Binding Price}"
-                                   FontAttributes="Italic"
-                                   VerticalOptions="End" />
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    NumberOfTapsRequired="1"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:BooksViewModel}}, 
-                                    Path=BookTapped}"		
-                                    CommandParameter="{Binding .}">
-                                </TapGestureRecognizer>
-                            </Grid.GestureRecognizers>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
+        <AbsoluteLayout>
+            <SearchBar x:DataType="local:BooksViewModel"
+                       Placeholder="Search items..."
+                       Text="{Binding SearchText}"/>
+            <RefreshView x:DataType="local:BooksViewModel" Margin="0, 50, 0, 0"
+                         Command="{Binding LoadBooksCommand}"
+                         IsRefreshing="{Binding IsBusy, 
+                         Mode=TwoWay}">
+                <CollectionView ItemsSource="{Binding Books, Mode=TwoWay}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Execute">
+                                        <SwipeItem x:DataType="model:Book"
+                                                   Text="Delete"
+                                                   Command="{Binding Source={RelativeSource AncestorType={x:Type local:BooksViewModel}}, 
+                                                   Path=DeleteBookCommand, Mode=TwoWay}"		
+                                                   CommandParameter="{Binding .}"
+                                                   BackgroundColor="Red">
+                                         </SwipeItem>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Grid Padding="10" x:DataType="model:Book">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.RowSpan="2"
+                                           Source="{Binding ImageSource}"
+                                           Aspect="AspectFill"
+                                           HeightRequest="60"
+                                           WidthRequest="60" />
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                           Text="{Binding Title, Mode=TwoWay}"
+                                           FontAttributes="Bold" />
+                                    <Label Grid.Row="1"
+                                           Grid.Column="1"
+                                           Text="{Binding SubTitle, Mode=TwoWay}"
+                                           FontAttributes="Italic"
+                                           VerticalOptions="End" />
+                                    <Label Grid.Row="2"
+                                           Grid.Column="1"
+                                           Text="{Binding Price, Mode=TwoWay}"
+                                           FontAttributes="Italic"
+                                           VerticalOptions="End" />
+                                    <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        NumberOfTapsRequired="1"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:BooksViewModel}}, 
+                                        Path=BookTapped, Mode=TwoWay}"		
+                                        CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

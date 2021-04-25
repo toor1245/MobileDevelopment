@@ -52,5 +52,45 @@
     <EmbeddedResource Include="Resources\Image_10.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Resources\9780321856715.json" />
+    <EmbeddedResource Include="Resources\9780321856715.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\9780321862969.json" />
+    <EmbeddedResource Include="Resources\9780321862969.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\9781118841471.json" />
+    <EmbeddedResource Include="Resources\9781118841471.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\9781430236054.json" />
+    <EmbeddedResource Include="Resources\9781430236054.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\9781430237105.json" />
+    <EmbeddedResource Include="Resources\9781430237105.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\9781430238072.json" />
+    <EmbeddedResource Include="Resources\9781430238072.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\9781430245124.json" />
+    <EmbeddedResource Include="Resources\9781430245124.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\9781430260226.json" />
+    <EmbeddedResource Include="Resources\9781430260226.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\9781449308360.json" />
+    <EmbeddedResource Include="Resources\9781449308360.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\9781449342753.json" />
+    <EmbeddedResource Include="Resources\9781449342753.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

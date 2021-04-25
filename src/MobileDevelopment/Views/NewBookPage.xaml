@@ -4,10 +4,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDevelopment.Views.NewBookPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Hello, world!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+        <StackLayout Spacing="3" Padding="15">
+            <Label Text="Title" FontSize="Medium" />
+            <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+            
+            <Label Text="Subtitle" FontSize="Medium" />
+            <Entry Text="{Binding SubTitle, Mode=TwoWay}" FontSize="Medium" />
+            
+            <Label Text="Price" FontSize="Medium" />
+            <Entry Keyboard="Numeric" Text="{Binding Price, Mode=TwoWay}" FontSize="Medium" />
+            
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Add" Command="{Binding AddItemCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
