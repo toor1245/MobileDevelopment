@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:local="clr-namespace:MobileDevelopment.ViewModels;assembly=MobileDevelopment"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:MobileDevelopment.Models;assembly=MobileDevelopment"  
+             Title="{Binding Title}"
+             x:Class="MobileDevelopment.Views.BooksPage">
+    <ContentPage.Content>
+        <RefreshView x:DataType="local:BooksViewModel" Command="{Binding LoadBooksCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView ItemsSource="{Binding Books}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" x:DataType="model:Book">
+                            <Label Text="{Binding Id}" 
+                                   LineBreakMode="TailTruncation"
+                                   FontSize="16" />
+                            <Label Text="{Binding Isbn13}" 
+                                   LineBreakMode="TailTruncation"
+                                   FontSize="13" />
+                            <Label Text="{Binding Price}" 
+                                   LineBreakMode="WordWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    NumberOfTapsRequired="1"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:BooksViewModel}}, Path=BookTapped}"		
+                                    CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

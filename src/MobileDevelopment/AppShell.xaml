@@ -56,5 +56,8 @@
     <FlyoutItem Title="Laboratory Work №2" Icon="icon_feed.png">
         <ShellContent Route="ChartPage" ContentTemplate="{DataTemplate local:ChartPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Laboratory Work №3" Icon="ic_launcher.png">
+        <ShellContent Route="BooksPage" ContentTemplate="{DataTemplate local:BooksPage}" />
+    </FlyoutItem>
     
 </Shell>

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-
 namespace MobileDevelopment.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private bool _isBusy = false;
+        private bool _isBusy;
+        private string _title = string.Empty;
+        
         public bool IsBusy
         {
             get => _isBusy;
             set => SetProperty(ref _isBusy, value);
         }
-
-        private string _title = string.Empty;
+        
         public string Title
         {
             get => _title;

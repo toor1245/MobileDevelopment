@@ -1,4 +1,4 @@
-﻿using System;
+﻿using MobileDevelopment.Views;
 using Xamarin.Forms;
 
 namespace MobileDevelopment
@@ -8,8 +8,7 @@ namespace MobileDevelopment
         public AppShell()
         {
             InitializeComponent(); 
-            // Routing example
-            // Routing.RegisterRoute(nameof(FromPage), typeof(ToPage));
+            Routing.RegisterRoute(nameof(BookDetailPage), typeof(BookDetailPage));
         }
     }
 }

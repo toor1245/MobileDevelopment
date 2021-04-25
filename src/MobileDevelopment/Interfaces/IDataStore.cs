@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using MobileDevelopment.Models;
 
 namespace MobileDevelopment.Interfaces
 {
@@ -9,6 +10,6 @@ namespace MobileDevelopment.Interfaces
         Task<bool> UpdateItemAsync(T item);
         Task<bool> DeleteItemAsync(string id);
         Task<T> GetItemAsync(string id);
-        Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
+        Task<BookValuation> GetItemsAsync(bool forceRefresh = false);
     }
 }
