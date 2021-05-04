@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:MobileDevelopment.Views"
        Title="MobileDevelopment"
        x:Class="MobileDevelopment.AppShell">
     
@@ -58,5 +59,7 @@
     <FlyoutItem Title="Laboratory Work №3-4" Icon="ic_launcher.png">
         <ShellContent Route="BooksPage" ContentTemplate="{DataTemplate local:BooksPage}" />
     </FlyoutItem>
-    
+    <FlyoutItem Title="Laboratory Work №5" Icon="icon_feed.png">
+        <ShellContent Route="GridGalleryPage" ContentTemplate="{DataTemplate local:GridGalleryPage}" />
+    </FlyoutItem>
 </Shell>
