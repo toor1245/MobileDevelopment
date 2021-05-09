@@ -26,11 +26,11 @@ namespace MobileDevelopment.ViewModels
             }
         }
 
-        private async void LoadItemId(string itemId)
+        private async void LoadItemId(string isbn13)
         {
             try
             {
-                var item = await BaseStoreViewModel.BookStore.GetBookDetail(itemId);
+                var item = await BaseStore.BookStore.GetBookDetailAsync(isbn13);
                 BookDetail = item;
             }
             catch (Exception)

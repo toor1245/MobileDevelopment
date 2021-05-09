@@ -15,6 +15,7 @@ namespace MobileDevelopment
             InitializeComponent();
             DependencyService.Register<IChartStore, ChartStore>();
             DependencyService.Register<IBookStore, BookStore>();
+            DependencyService.Register<IGalleryStore, GalleryStore>();
             MainPage = new AppShell();
         }
 
