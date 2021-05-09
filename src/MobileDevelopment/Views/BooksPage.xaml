@@ -16,11 +16,8 @@
             <SearchBar x:DataType="local:BooksViewModel"
                        Placeholder="Search items..."
                        Text="{Binding SearchText}"/>
-            <RefreshView x:DataType="local:BooksViewModel" Margin="0, 50, 0, 0"
-                         Command="{Binding LoadBooksCommand}"
-                         IsRefreshing="{Binding IsBusy, 
-                         Mode=TwoWay}">
-                <CollectionView ItemsSource="{Binding Books, Mode=TwoWay}" SelectionMode="None">
+            <RefreshView x:DataType="local:BooksViewModel" Margin="0, 50, 0, 0">
+                <CollectionView ItemsSource="{Binding Books, Mode=TwoWay}" SelectionMode="None" EmptyView="No items found">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <SwipeView>
@@ -37,16 +34,16 @@
                                 </SwipeView.RightItems>
                                 <Grid Padding="10" x:DataType="model:Book">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Image Grid.RowSpan="2"
-                                           Source="{Binding ImageSource}"
+                                           Source="{Binding Image}"
                                            Aspect="AspectFill"
                                            HeightRequest="60"
                                            WidthRequest="60" />

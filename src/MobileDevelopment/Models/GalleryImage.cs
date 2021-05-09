@@ -5,7 +5,8 @@ namespace MobileDevelopment.Models
     public class GalleryImage : BaseModel
     {
         private ImageSource _image;
-        private Color _color = Color.White;
+        private Color _color;
+        private bool _isRunning;
         
         public ImageSource Image
         {
@@ -15,21 +16,30 @@ namespace MobileDevelopment.Models
 
         public Color Color
         {
+            get => _color;
+            set => SetProperty(ref _color, value);
+        }
+
+        public bool IsRunning
+        {
             get
             {
-                if (Image is null)
+                if (_image is null)
                 {
-                    return _color;
+                    _isRunning = true;
+                    return _isRunning;
                 }
-                _color = Color.Gray;
-                return _color;
+
+                _isRunning = false;
+                return _isRunning;
             }
-            set => SetProperty(ref _color, value);
+            set => SetProperty(ref _isRunning, value);
         }
 
         public GalleryImage()
         {
             Color = Color.Gray;
+            IsRunning = false;
         }
     }
 }

@@ -9,67 +9,117 @@
           <ToolbarItem x:DataType="local:GridGalleryViewModel" Text="Add" Command="{Binding AddImageCommand}" />
      </ContentPage.ToolbarItems>
      <ContentPage.Content>
-         <CollectionView  x:DataType="local:GridGalleryViewModel" VerticalOptions="Fill" HorizontalOptions="Fill" HorizontalScrollBarVisibility="Always" ItemsSource="{Binding Galleries}">
-              <CollectionView.ItemTemplate>
-                   <DataTemplate>
-                        <Grid x:DataType="models:Gallery">
-                             <Grid.ColumnDefinitions>
-                                  <ColumnDefinition Width="*" />
-                                  <ColumnDefinition Width="*" />
-                                  <ColumnDefinition Width="*" />
-                                  <ColumnDefinition Width="*" />
-                             </Grid.ColumnDefinitions>
-                             <Grid.RowDefinitions>
-                                  <RowDefinition Height="{Binding GridHeight}" />
-                                  <RowDefinition Height="{Binding GridHeight}" />
-                                  <RowDefinition Height="{Binding GridHeight}" />
-                                  <RowDefinition Height="{Binding GridHeight}" />
-                             </Grid.RowDefinitions>
-                              
-                             <Image Source="{Binding Image00.Image}" 
-                                    BackgroundColor="{Binding Image00.Color}" 
-                                    Grid.Column="0" 
-                                    Grid.Row="0" />
-                             
-                             <Image Source="{Binding Image01.Image}" 
-                                    BackgroundColor="{Binding Image01.Color}" 
-                                    Grid.Column="0" 
-                                    Grid.Row="1" />
-                             
-                             <Image Source="{Binding Image02.Image}"
-                                    BackgroundColor="{Binding Image02.Color}" 
-                                    Grid.Column="0"
-                                    Grid.Row="2" />
-                             
-                             <Image Source="{Binding Image03.Image}" 
-                                    BackgroundColor="{Binding Image03.Color}" 
-                                    Grid.Column="0" 
-                                    Grid.Row="3" />
+         <RefreshView x:DataType="local:GridGalleryViewModel" 
+                      Command="{Binding LoadImagesCommand }"
+                      IsRefreshing="{Binding IsBusy, Mode=TwoWay}" >
+             <CollectionView x:DataType="local:GridGalleryViewModel" VerticalOptions="Fill" HorizontalOptions="Fill" HorizontalScrollBarVisibility="Always" ItemsSource="{Binding Galleries}">
+                  <CollectionView.ItemTemplate>
+                       <DataTemplate>
+                            <Grid x:DataType="models:Gallery">
+                                 <Grid.ColumnDefinitions>
+                                      <ColumnDefinition Width="*" />
+                                      <ColumnDefinition Width="*" />
+                                      <ColumnDefinition Width="*" />
+                                      <ColumnDefinition Width="*" />
+                                 </Grid.ColumnDefinitions>
+                                 <Grid.RowDefinitions>
+                                      <RowDefinition Height="{Binding GridHeight}" />
+                                      <RowDefinition Height="{Binding GridHeight}" />
+                                      <RowDefinition Height="{Binding GridHeight}" />
+                                      <RowDefinition Height="{Binding GridHeight}" />
+                                 </Grid.RowDefinitions>
+                                  
+                                 <Image Source="{Binding Image00.Image}" 
+                                       BackgroundColor="{Binding Image00.Color}" 
+                                       Grid.Column="0" 
+                                       Grid.Row="0" />
+                                 <ActivityIndicator 
+                                      Grid.Row="0" 
+                                      Grid.Column="0" 
+                                      Margin="30" 
+                                      Color="Orange"
+                                      IsRunning="{Binding Image00.IsRunning, Mode=TwoWay}"/>
 
-                             <Image Source="{Binding Image13.Image}" 
-                                    BackgroundColor="{Binding Image13.Color}" 
-                                    Grid.Column="1"
-                                    Grid.Row="3" />
-                             
-                             <Image Source="{Binding Image23.Image}"
-                                    BackgroundColor="{Binding Image23.Color}"
-                                    Grid.Column="2"
-                                    Grid.Row="3" />
-                             
-                             <Image Source="{Binding Image33.Image}"
-                                    BackgroundColor="{Binding Image33.Color}" 
-                                    Grid.Column="3"
-                                    Grid.Row="3" />
-                             
-                             <Image Source="{Binding ImageColRowSpan3.Image}" 
-                                    BackgroundColor="{Binding ImageColRowSpan3.Color}" 
-                                    Grid.Column="1" 
-                                    Grid.Row="0" 
-                                    Grid.ColumnSpan="3" 
-                                    Grid.RowSpan="3" />
-                        </Grid>
-                   </DataTemplate>
-              </CollectionView.ItemTemplate>
-         </CollectionView>
-    </ContentPage.Content>
+                                 
+                                 <Image Source="{Binding Image01.Image}" 
+                                        BackgroundColor="{Binding Image01.Color}" 
+                                        Grid.Column="0" 
+                                        Grid.Row="1" />
+                                 <ActivityIndicator 
+                                      Grid.Row="1" 
+                                      Grid.Column="0" 
+                                      Margin="30"
+                                      Color="Orange" 
+                                      IsRunning="{Binding Image01.IsRunning, Mode=TwoWay}"/>
+                                 
+                                 <Image Source="{Binding Image02.Image}"
+                                        BackgroundColor="{Binding Image02.Color}" 
+                                        Grid.Column="0"
+                                        Grid.Row="2" />
+                                 <ActivityIndicator Grid.Row="2" 
+                                                    Grid.Column="0"
+                                                    Margin="30" 
+                                                    Color="Orange" 
+                                                    IsRunning="{Binding Image02.IsRunning, Mode=TwoWay}"/>
+
+                                 
+                                 <Image Margin="0, 0, 0, 5" Source="{Binding Image03.Image}" 
+                                        BackgroundColor="{Binding Image03.Color}" 
+                                        Grid.Column="0" 
+                                        Grid.Row="3" />
+                                 <ActivityIndicator Grid.Row="3" 
+                                                    Grid.Column="0"
+                                                    Margin="30"
+                                                    Color="Orange" 
+                                                    IsRunning="{Binding Image03.IsRunning, Mode=TwoWay}"/>
+                                 
+                                 <Image Margin="0, 0, 0, 5" Source="{Binding Image13.Image}" 
+                                       BackgroundColor="{Binding Image13.Color}" 
+                                       Grid.Column="1"
+                                       Grid.Row="3" />
+                                 <ActivityIndicator Grid.Row="3" 
+                                                    Grid.Column="1" 
+                                                    Margin="30" 
+                                                    Color="Orange"
+                                                    IsRunning="{Binding Image13.IsRunning, Mode=TwoWay}"/>
+                                 
+                                 <Image Margin="0, 0, 0, 5" Source="{Binding Image23.Image}"
+                                       BackgroundColor="{Binding Image23.Color}"
+                                       Grid.Column="2"
+                                       Grid.Row="3" />
+                                 <ActivityIndicator Grid.Row="3" 
+                                                    Grid.Column="2" Margin="30" 
+                                                    Color="Orange" 
+                                                    IsRunning="{Binding Image23.IsRunning, Mode=TwoWay}"/>
+                                 
+                                 <Image Margin="0, 0, 0, 5" Source="{Binding Image33.Image}"
+                                       BackgroundColor="{Binding Image33.Color}" 
+                                       Grid.Column="3"
+                                       Grid.Row="3" />
+                                 <ActivityIndicator
+                                      Grid.Row="3"
+                                      Grid.Column="3" 
+                                      Margin="30" 
+                                      Color="Orange" 
+                                      IsRunning="{Binding Image33.IsRunning, Mode=TwoWay}"/>
+                                 
+                                 <Image Source="{Binding ImageColRowSpan3.Image}" Aspect="AspectFit"
+                                       BackgroundColor="{Binding ImageColRowSpan3.Color}" 
+                                       Grid.Column="1" 
+                                       Grid.Row="0" 
+                                       Grid.ColumnSpan="3" 
+                                       Grid.RowSpan="3" />
+                                 <ActivityIndicator Scale="0.3" Grid.Row="0" 
+                                                    Grid.Column="1" 
+                                                    Grid.ColumnSpan="3"
+                                                    Grid.RowSpan="3"
+                                                    Margin="30"
+                                                    Color="Orange"
+                                                    IsRunning="{Binding ImageColRowSpan3.IsRunning, Mode=TwoWay}"/>
+                            </Grid>
+                       </DataTemplate>
+                  </CollectionView.ItemTemplate>
+             </CollectionView>
+         </RefreshView>
+     </ContentPage.Content>
 </ContentPage>

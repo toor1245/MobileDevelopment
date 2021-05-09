@@ -43,7 +43,7 @@ namespace MobileDevelopment.ViewModels
                 SubTitle = SubTitle,
                 Price = string.Concat("$", Price)
             };
-            await BaseStoreViewModel.BookStore.AddItemAsync(book);
+            await BaseStore.BookStore.AddItemAsync(book);
             await Shell.Current.GoToAsync("..");
         }
     }

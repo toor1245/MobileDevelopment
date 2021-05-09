@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:MobileDevelopment.ViewModels;assembly=MobileDevelopment"
              x:Class="MobileDevelopment.Views.BookDetailPage">
        <StackLayout x:DataType="local:BookDetailViewModel" Margin="15">
-        <Image Source="{Binding BookDetail.ImageSource }"
+        <Image Source="{Binding BookDetail.Image }"
                Aspect="AspectFill"
                HorizontalOptions="Center"
                HeightRequest="250"

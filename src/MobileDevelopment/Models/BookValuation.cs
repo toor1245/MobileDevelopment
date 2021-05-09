@@ -7,5 +7,10 @@ namespace MobileDevelopment.Models
     {
         [JsonPropertyName("books")]
         public List<Book> Books { get; set; }
+
+        public BookValuation()
+        {
+            Books = new List<Book>();
+        }
     }
 }
