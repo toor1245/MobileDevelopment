@@ -1,4 +1,6 @@
+using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MobileDevelopment.Models;
 using MobileDevelopment.Views;
@@ -14,6 +16,7 @@ namespace MobileDevelopment.ViewModels
         public ObservableCollection<Book> Books { get; }
         public Command AddBookCommand { get; }
         public Command<Book> DeleteBookCommand { get; }
+        public Command OnLoadCommand { get; }
         
         public ICommand SearchCommand { get; }
         public Command<Book> BookTapped { get; }
@@ -24,8 +27,9 @@ namespace MobileDevelopment.ViewModels
             Books = new ObservableCollection<Book>();
             BookTapped = new Command<Book>(OnItemSelected);
             AddBookCommand = new Command(OnAddItem);
-            SearchCommand = new Command<string>(OnSearchCommand);
+            SearchCommand = new Command<string>(async x => await OnSearchCommand(x));
             DeleteBookCommand = new Command<Book>(OnDeleteCommand);
+            OnLoadCommand = new Command(OnLoad);
         }
 
         #region .ui props
@@ -36,7 +40,7 @@ namespace MobileDevelopment.ViewModels
             set
             {
                 SetProperty(ref _searchText, value);
-                OnSearchCommand(_searchText);
+                Task.Run(async () => await OnSearchCommand(_searchText));
             }
         }
 
@@ -53,6 +57,12 @@ namespace MobileDevelopment.ViewModels
         #endregion
 
         #region .actions
+
+        public void OnLoad()
+        {
+            IsBusy = true;
+            IsBusy = false;
+        }
         
         public void OnAppearing()
         {
@@ -81,7 +91,7 @@ namespace MobileDevelopment.ViewModels
             Books.Remove(obj);
         }
 
-        private async void OnSearchCommand(string query)
+        private async Task OnSearchCommand(string query)
         {
             Books.Clear();
             if (query.Length < 3)
