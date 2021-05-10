@@ -18,6 +18,7 @@ namespace MobileDevelopment.Services
             _httpClient = new HttpClient();
         }
         
+
         public async Task<ICollection<Hit>> GetImagesAsync()
         {
             var composer = new HttpImageRequestComposer();

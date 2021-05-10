@@ -91,6 +91,8 @@ namespace MobileDevelopment.ViewModels
                 IsBusy = false;
             }
         }
+        
+        #endregion
 
         private void Refresh(IEnumerable<Hit> hits)
         {

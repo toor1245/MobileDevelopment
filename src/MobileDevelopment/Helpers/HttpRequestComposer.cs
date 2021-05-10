@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
+
 namespace MobileDevelopment.Helpers
 {
     public abstract class HttpRequestComposer
