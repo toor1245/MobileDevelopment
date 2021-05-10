@@ -27,4 +27,7 @@ Laboratory Work 5
 Laboratory Work 6
 * [PR](https://github.com/toor1245/MobileDevelopment/pull/12)
 
+Laboratory Work 7
+* [PR](https://github.com/toor1245/MobileDevelopment/pull/13)
+
 
