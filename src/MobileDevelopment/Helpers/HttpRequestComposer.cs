@@ -1,4 +1,7 @@
 using System.Linq;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
 
 namespace MobileDevelopment.Helpers
 {
@@ -21,5 +24,13 @@ namespace MobileDevelopment.Helpers
         }
 
         protected abstract string BuildUrlRequest();
+
+        public static async Task DisplayAlertAsync()
+        {
+            await Shell.Current.DisplayAlert(
+                "Incorrect search", 
+                "restriction characters: ';', '/', '?', ':', '@', '&', '=', '$'",
+                "OK");
+        }
     }
 }

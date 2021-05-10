@@ -16,6 +16,8 @@ namespace MobileDevelopment.Droid
             base.OnCreate(savedInstanceState);
 
             OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
+            Xamarin.Forms.Forms.SetFlags ("SwipeView_Experimental");
+            Xamarin.Forms.Forms.SetFlags ("CollectionView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());

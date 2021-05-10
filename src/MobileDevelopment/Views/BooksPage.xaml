@@ -16,13 +16,15 @@
             <SearchBar x:DataType="local:BooksViewModel"
                        Placeholder="Search items..."
                        Text="{Binding SearchText}"/>
-            <RefreshView x:DataType="local:BooksViewModel" Margin="0, 50, 0, 0">
+            <RefreshView x:DataType="local:BooksViewModel" Margin="0, 50, 0, 0" 
+                         Command="{Binding OnLoadCommand}"
+                         IsRefreshing="{Binding IsBusy}">
                 <CollectionView ItemsSource="{Binding Books, Mode=TwoWay}" SelectionMode="None" EmptyView="No items found">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <SwipeView>
                                 <SwipeView.RightItems>
-                                    <SwipeItems Mode="Execute">
+                                    <SwipeItems Mode="Reveal">
                                         <SwipeItem x:DataType="model:Book"
                                                    Text="Delete"
                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:BooksViewModel}}, 
@@ -50,13 +52,11 @@
                                     <Label Grid.Row="0" Grid.Column="1"
                                            Text="{Binding Title, Mode=TwoWay}"
                                            FontAttributes="Bold" />
-                                    <Label Grid.Row="1"
-                                           Grid.Column="1"
+                                    <Label Grid.Row="1" Grid.Column="1"
                                            Text="{Binding SubTitle, Mode=TwoWay}"
                                            FontAttributes="Italic"
                                            VerticalOptions="End" />
-                                    <Label Grid.Row="2"
-                                           Grid.Column="1"
+                                    <Label Grid.Row="2" Grid.Column="1"
                                            Text="{Binding Price, Mode=TwoWay}"
                                            FontAttributes="Italic"
                                            VerticalOptions="End" />

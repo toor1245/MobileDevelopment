@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -16,12 +17,14 @@ namespace MobileDevelopment.ViewModels
         
         private int _positionPriority;
         private int _dimension;
+        private static bool isCached;
 
         #endregion
 
         #region .props
         
         public ObservableCollection<Gallery> Galleries { get; set; }
+        public static List<Hit> ImagesCache { get; } = new();
         public ICommand AddImageCommand { get; }
         public ICommand LoadImagesCommand { get; }
         
@@ -69,15 +72,15 @@ namespace MobileDevelopment.ViewModels
             _positionPriority = 0;
             try
             {
-                var response = await BaseStore.GalleryStore.GetImagesAsync();
-                foreach (var t in response.Hits)
+                if (!isCached)
                 {
-                    ImageSource imageSource = new UriImageSource
-                    {
-                        Uri = new Uri(t.PreviewUrl)
-                    };
-                    RefreshImages(new GalleryImage(), imageSource);
+                    var hits = await BaseStore.GalleryStore.GetImagesAsync();
+                    ImagesCache.AddRange(hits);
+                    Refresh(hits);
+                    isCached = true;
+                    return;
                 }
+                Refresh(ImagesCache);
             }
             catch (Exception e)
             {
@@ -86,6 +89,20 @@ namespace MobileDevelopment.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+        
+        #endregion
+
+        private void Refresh(IEnumerable<Hit> hits)
+        {
+            foreach (var t in hits)
+            {
+                ImageSource imageSource = new UriImageSource
+                {
+                    Uri = new Uri(t.PreviewUrl)
+                };
+                RefreshImages(new GalleryImage(), imageSource);
             }
         }
         

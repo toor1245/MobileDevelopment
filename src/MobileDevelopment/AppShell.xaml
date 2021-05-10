@@ -56,10 +56,10 @@
     <FlyoutItem Title="Laboratory Work №2" Icon="icon_feed.png">
         <ShellContent Route="ChartPage" ContentTemplate="{DataTemplate local:ChartPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Laboratory Work №3-4" Icon="ic_launcher.png">
+    <FlyoutItem Title="Laboratory Work №3/4/6/7" Icon="book.png">
         <ShellContent Route="BooksPage" ContentTemplate="{DataTemplate local:BooksPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Laboratory Work №5" Icon="icon_feed.png">
+    <FlyoutItem Title="Laboratory Work №5/7" Icon="gallery.png">
         <ShellContent Route="GridGalleryPage" ContentTemplate="{DataTemplate local:GridGalleryPage}" />
     </FlyoutItem>
 </Shell>

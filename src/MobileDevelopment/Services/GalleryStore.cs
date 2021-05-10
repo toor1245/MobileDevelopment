@@ -1,11 +1,11 @@
-using System.Net;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using MobileDevelopment.Helpers;
 using MobileDevelopment.Interfaces;
 using MobileDevelopment.Models;
-using Xamarin.Forms;
+using MobileDevelopment.Repositories;
 
 namespace MobileDevelopment.Services
 {
@@ -18,44 +18,34 @@ namespace MobileDevelopment.Services
             _httpClient = new HttpClient();
         }
         
-        public async Task<GalleryResponse> GetImagesAsync()
+
+        public async Task<ICollection<Hit>> GetImagesAsync()
         {
             var composer = new HttpImageRequestComposer();
             
             if (!composer.IsCorrectRequest)
             {
-                await Shell.Current.DisplayAlert(
-                    title: "Incorrect search", 
-                    message: "restriction characters: ';', '/', '?', ':', '@', '&', '=', '$'",
-                    cancel: "OK");
+                await HttpRequestComposer.DisplayAlertAsync();
                 return null;
             }
             
             var response = await _httpClient.GetAsync(composer.UrlRequest);
-            
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                await Shell.Current.DisplayAlert("Alert", "failed to get images", "OK");
-                return null;
-            }
-            
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<GalleryResponse>(content);
-        }
 
-        public async Task<GalleryResponse> GetImagesAsync(string request, int count)
-        {
-            var composer = new HttpImageRequestComposer(request);
-            var response = await _httpClient.GetAsync(composer.UrlRequest);
-            
-            if (response.StatusCode != HttpStatusCode.OK)
+            if (!response.IsSuccessStatusCode)
             {
-                await Shell.Current.DisplayAlert("Alert", "failed to get images", "OK");
+                var list = UnitOfWork.Hits.GetItems();
+                if (list is not null)
+                {
+                    return list;
+                }
+                HttpResponseHelper.DisplayNotSuccessfulStatusCodeAlert(response);
                 return null;
             }
             
             var content = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<GalleryResponse>(content);
+            var hits = JsonSerializer.Deserialize<GalleryResponse>(content)?.Hits;
+            UnitOfWork.Hits.SaveItems(hits);
+            return hits;
         }
     }
 }

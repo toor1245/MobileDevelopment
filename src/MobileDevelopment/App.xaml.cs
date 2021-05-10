@@ -1,9 +1,9 @@
-﻿using MobileDevelopment.Views;
-using System;
+﻿using System;
+using MobileDevelopment.EFContext;
 using MobileDevelopment.Interfaces;
+using MobileDevelopment.Repositories;
 using MobileDevelopment.Services;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MobileDevelopment
 {
@@ -18,7 +18,7 @@ namespace MobileDevelopment
             DependencyService.Register<IGalleryStore, GalleryStore>();
             MainPage = new AppShell();
         }
-
+        
         protected override void OnStart()
         {
         }
