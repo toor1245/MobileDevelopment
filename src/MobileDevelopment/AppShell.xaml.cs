@@ -1,4 +1,5 @@
-﻿using MobileDevelopment.Views;
+﻿using MobileDevelopment.Repositories;
+using MobileDevelopment.Views;
 using Xamarin.Forms;
 
 namespace MobileDevelopment

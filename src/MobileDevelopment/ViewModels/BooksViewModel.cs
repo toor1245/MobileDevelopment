@@ -1,4 +1,3 @@
-using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -40,7 +39,7 @@ namespace MobileDevelopment.ViewModels
             set
             {
                 SetProperty(ref _searchText, value);
-                Task.Run(async () => await OnSearchCommand(_searchText));
+                OnSearchCommand(_searchText);
             }
         }
 

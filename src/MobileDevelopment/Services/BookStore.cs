@@ -1,6 +1,6 @@
-using System.Collections.Generic;
+using System;
+using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -8,6 +8,7 @@ using MobileDevelopment.Extensions;
 using MobileDevelopment.Helpers;
 using MobileDevelopment.Interfaces;
 using MobileDevelopment.Models;
+using MobileDevelopment.Repositories;
 using Xamarin.Forms;
 
 namespace MobileDevelopment.Services
@@ -35,11 +36,16 @@ namespace MobileDevelopment.Services
         
         public async Task<bool> AddItemAsync(Book item)
         {
-            if (item == null)
+            if (item is null)
             {
                 return await Task.FromResult(false);
             }
             _bookValuation.Books.Add(item);
+            var book = UnitOfWork.Books.GetItem(x => x.Isbn13 == item.Isbn13);
+            if (book is null)
+            {
+                UnitOfWork.Books.SaveItem(item);
+            }
             return await Task.FromResult(true);
         }
 
@@ -66,20 +72,28 @@ namespace MobileDevelopment.Services
 
         public Task<Book> GetItemAsync(string id)
         {
-            var book = _bookValuation.Books.FirstOrDefault(x => x.Id == id);
+            var book = _bookValuation.Books.FirstOrDefault(x => x.BookId == id);
             return Task.FromResult(book);
         }
         
         public async Task<BookDetail> GetBookDetailAsync(string isbn13)
         {
             var response = await _httpClient.GetAsync(string.Concat(Constants.URL_BOOK_DETAIL_INFO, isbn13));
+            if (!response.IsSuccessStatusCode)
+            {
+                var book = UnitOfWork.BookDetails.GetItem(x => x.Isbn13 == isbn13);
+                if (book is not null)
+                {
+                    return book;
+                }
+                await Shell.Current.DisplayAlert("Not found", $"Book not found by isbn13: {isbn13}", "OK");
+                return null;
+            }
+            
             var content = await response.Content.ReadAsStringAsync();
-            return content == null ? null : JsonSerializer.Deserialize<BookDetail>(content);
-        }
-
-        public List<Book> LoadBooks()
-        {
-            return _bookValuation.Books;
+            var bookDetail = JsonSerializer.Deserialize<BookDetail>(content);
+            UnitOfWork.BookDetails.SaveItem(bookDetail);
+            return bookDetail;
         }
 
         public async Task<BookValuation> GetBooksAsync(string title)
@@ -87,23 +101,44 @@ namespace MobileDevelopment.Services
             var composer = new HttpBookRequestComposer(title);
             if (!composer.IsCorrectRequest)
             {
-                await Shell.Current.DisplayAlert(
-                    "Incorrect search", 
-                    "restriction characters: ';', '/', '?', ':', '@', '&', '=', '$'", 
-                    "OK");
+                await HttpRequestComposer.DisplayAlertAsync();
                 return null;
             }
-            var response = await _httpClient.GetAsync(composer.UrlRequest);
-            if (response.StatusCode != HttpStatusCode.OK)
+            try
             {
-                return null;
+                var response = await _httpClient.GetAsync(composer.UrlRequest);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return HandleNotSuccessfulResponse();
+                }
+                var content = await response.Content.ReadAsStringAsync();
+                _bookValuation = JsonSerializer.Deserialize<BookValuation>(content);
+                UnitOfWork.Books.SaveItems(_bookValuation?.Books);
+                return _bookValuation;
             }
-            var content = await response.Content.ReadAsStringAsync();
-            _bookValuation = JsonSerializer.Deserialize<BookValuation>(content);
-            return _bookValuation;
+            catch (Exception e)
+            {
+                return HandleNotSuccessfulResponse();
+            }
         }
-        
+
+        private static BookValuation HandleNotSuccessfulResponse()
+        {
+            var collection = UnitOfWork.Books.GetItems();
+            if (collection.Count != 0)
+            {
+                _bookValuation.Books = collection.ToList();
+                return _bookValuation;
+            }
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                Shell.Current.DisplayAlert(
+                    "Incorrect search",
+                    "Not found",
+                    "OK");
+            });
+            return null;
+        }
         #endregion
-        
     }
 }

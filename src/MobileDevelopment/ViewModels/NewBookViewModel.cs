@@ -38,7 +38,7 @@ namespace MobileDevelopment.ViewModels
         {
             var book = new Book
             {
-                Id = Guid.NewGuid().ToString(),
+                BookId = Guid.NewGuid().ToString(),
                 Title = Name,
                 SubTitle = SubTitle,
                 Price = string.Concat("$", Price)

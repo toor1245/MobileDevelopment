@@ -1,15 +1,16 @@
-using System.Reflection;
 using System.Text.Json.Serialization;
-using MobileDevelopment.Extensions;
-using MobileDevelopment.Views;
-using Xamarin.Forms;
+using SQLite;
 
 namespace MobileDevelopment.Models
 {
+    [Table("Books")]
     public class Book
     {
+        [PrimaryKey, AutoIncrement, Column("_id")]
+        public int Id { get; set; }
+        
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string BookId { get; set; }
         
         [JsonPropertyName("title")]
         public string Title { get; set; }

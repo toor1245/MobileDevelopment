@@ -1,28 +1,58 @@
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using MobileDevelopment.Interfaces;
+using MobileDevelopment.Models;
+using SQLite;
 
 namespace MobileDevelopment.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> 
-        where TEntity : class
+        where TEntity : new()
     {
-        private readonly DbSet<TEntity> _entity;
+        private readonly SQLiteConnection _database;
+
+        public Repository(string connection)
+        {
+            _database = new SQLiteConnection(connection);
+            _database.CreateTable<Book>();
+            _database.CreateTable<BookDetail>();
+            _database.CreateTable<Hit>();
+        }
+
+        public void CreateTable()
+        {
+            _database.CreateTable<TEntity>();
+        }
         
-        public Repository(DbContext context)
+        public List<TEntity> GetItems()
         {
-            _entity = context.Set<TEntity>();
+            return _database.Table<TEntity>().ToList();
         }
 
-        public async Task Add(TEntity entity)
+        public TEntity GetItem(int id)
         {
-            await _entity.AddAsync(entity);
+            return _database.Get<TEntity>(id);
         }
 
-        public async Task AddRange(IEnumerable<TEntity> entities)
+        public TEntity GetItem(Expression<Func<TEntity, bool>> predicate)
         {
-            await _entity.AddRangeAsync(entities);
+            return _database.Get(predicate);
+        }
+
+        public int DeleteItem(TEntity item)
+        {
+            return _database.Delete(item);
+        }
+
+        public int SaveItem(TEntity item)
+        {
+            return _database.Insert(item);
+        }
+
+        public void SaveItems(List<TEntity> entities)
+        {
+            _database.InsertAll(entities);
         }
     }
 }

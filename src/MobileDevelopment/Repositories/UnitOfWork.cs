@@ -1,51 +1,21 @@
 using System;
-using System.Threading.Tasks;
-using MobileDevelopment.EFContext;
-using MobileDevelopment.Interfaces;
+using System.IO;
 using MobileDevelopment.Models;
 
 namespace MobileDevelopment.Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    public static class UnitOfWork
     {
-        private readonly ApplicationContext _context;
-        private IRepository<Book> _bookRepository;
-        private IRepository<Gallery> _galleryRepository;
-        private bool _disposed;
+        private const string DATABASE_NAME = "mobile.db3";
+        private static readonly string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME);
         
-        public UnitOfWork(ApplicationContext context)
-        {
-            _context = context;
-        }
+        private static Repository<Book> _bookRepository;
+        public static Repository<Book> Books => _bookRepository ??= new Repository<Book>(path);
         
-        public IRepository<Book> Books => _bookRepository ??= new Repository<Book>(_context);
-        public IRepository<Gallery> Galleries => _galleryRepository ??= new Repository<Gallery>(_context);
+        private static Repository<Hit> _hitRepository;
+        public static Repository<Hit> Hits => _hitRepository ??= new Repository<Hit>(path);
         
-        public async Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
-
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (_disposed) 
-                return;
-            if (disposing)
-            {
-                _context.Dispose();
-            }
-            _disposed = true;
-        }
-        
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        private static Repository<BookDetail> _bookDetailRepository;
+        public static Repository<BookDetail> BookDetails => _bookDetailRepository ??= new Repository<BookDetail>(path);
     }
 }
